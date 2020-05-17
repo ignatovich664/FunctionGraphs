@@ -9,6 +9,5 @@ public class MainPanel extends JPanel {
         setBackground(Color.white);
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
-
     }
 }

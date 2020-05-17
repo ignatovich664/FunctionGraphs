@@ -14,16 +14,40 @@ public class GraphPanel extends JPanel {
     }
 
     public void paint(Graphics g){
+        g.setColor(Color.green);
+        for(int y = 0; true; ) {
+            //if(y == height / 2) continue;
+            g.drawLine(0,y , height , y);
+            y += 25;
+            if(y > height)
+                break;
+        }
+
+        for(int x = 0; true; ) {
+            //if(x == width / 2) continue;
+            g.drawLine(x,0 , x , width);
+            x += 25;
+            if(x > width)
+                break;
+        }
         g.setColor(Color.BLACK);
         g.drawLine(0,height / 2 , width , height / 2);
         g.drawLine(width / 2,0,width / 2,height);
-        drawLine(g, 1,0);
+        drawLineFunction(g, 6,10);
     }
 
-    private void drawLine(Graphics g, double k, double b) {
-        for (int x = 0; x < width; x++) {
-            int y = (int)( height - (k * x + b));
-            g.fillOval(x, y, 2, 2);
+    private void drawLineFunction(Graphics g, double k, double b) {
+        g.setColor(Color.BLACK);
+        int prevX = 0, prevY = 0;
+        for (int i = 0; i < width; i++) {
+            int x =  i - width / 2;
+            int y = (int)( height / 2 - (k * x + b * 25));
+
+            if(y != 0 && i < width && y < height)
+                g.drawLine(prevX,prevY,i,y);
+            //g.fillOval(i, y, 3, 3);
+            prevX = i;
+            prevY = y;
         }
     }
 }
