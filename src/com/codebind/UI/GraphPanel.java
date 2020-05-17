@@ -34,15 +34,22 @@ public class GraphPanel extends JPanel {
         g.drawLine(0,height / 2 , width , height / 2);
         g.drawLine(width / 2,0,width / 2,height);
         drawLineFunction(g, 6,10);
+        drawSquareFunction(g, 1, 2, 5);
     }
 
     private void drawLineFunction(Graphics g, double k, double b) {
+        drawFunction(g,0,k,b);
+    }
+    private void drawSquareFunction(Graphics g, double a, double b, double c){
+        drawFunction(g,a,b,c);
+    }
+
+    private void drawFunction(Graphics g, double a, double b, double c) {
         g.setColor(Color.BLACK);
         int prevX = 0, prevY = 0;
         for (int i = 0; i < width; i++) {
             int x =  i - width / 2;
-            int y = (int)( height / 2 - (k * x + b * 25));
-
+            int y = (int)( height / 2 - (a / 25 * x * x + b * x + c * 25));
             if(y != 0 && i < width && y < height)
                 g.drawLine(prevX,prevY,i,y);
             //g.fillOval(i, y, 3, 3);
