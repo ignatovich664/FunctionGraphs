@@ -12,30 +12,12 @@ public class GraphPanel extends JPanel {
         this.height = size;
         sqareSize = size / 20;
         setOpaque(false);
-
     }
 
     public void paint(Graphics g){
-        g.setColor(Color.green);
-        for(int y = 0; true; ) {
-            //if(y == height / 2) continue;
-            g.drawLine(0,y , height , y);
-            y += sqareSize;
-            if(y > height)
-                break;
-        }
-
-        for(int x = 0; true; ) {
-            //if(x == width / 2) continue;
-            g.drawLine(x,0 , x , width);
-            x += sqareSize;
-            if(x > width)
-                break;
-        }
-        g.setColor(Color.BLACK);
-        g.drawLine(0,height / 2 , width , height / 2);
-        g.drawLine(width / 2,0,width / 2,height);
-        drawLineFunction(g, 1,1);
+        drawGrid(g);
+        drawAxis(g);
+        drawLineFunction(g, 1,0);
         drawSquareFunction(g, 1, 0, 0);
         drawCubeFunction(g, 1,0,0,0);
     }
@@ -47,7 +29,7 @@ public class GraphPanel extends JPanel {
         drawFunction(g,0,a,b,c, Color.blue);
     }
     private void drawCubeFunction(Graphics g, double a, double b, double c, double d){
-        drawFunction(g,a,b,c, d, Color.MAGENTA);
+        drawFunction(g,a,b,c, d, Color.green);
     }
     private void drawFunction(Graphics g, double a, double b, double c, double d, Color color) {
         g.setColor(color);
@@ -57,9 +39,37 @@ public class GraphPanel extends JPanel {
             int y = (int)( height / 2 - ((a / sqareSize / sqareSize * x * x * x) + (b / sqareSize * x * x) + (c * x)  + (d * sqareSize)));
             if(y != 0 && i < width && y < height)
                 g.drawLine(prevX,prevY,i,y);
-            //g.fillOval(i, y, 3, 3);
             prevX = i;
             prevY = y;
         }
+    }
+    private void drawGrid(Graphics g) {
+        g.setColor(new Color(153,153,153));
+        for(int y = 0;; ) {
+            g.drawLine(0,y , height , y);
+            y += sqareSize;
+            if(y > height)
+                break;
+        }
+
+        for(int x = 0;; ) {
+            g.drawLine(x,0 , x , width);
+            x += sqareSize;
+            if(x > width)
+                break;
+        }
+    }
+    private void drawAxis(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillPolygon(new int[] {width, width - 10, width - 10}, new int[] {height / 2, height / 2 - 5, height / 2 + 5}, 3);
+        g.fillPolygon(new int[] {width / 2, width / 2 - 5, width / 2 + 5}, new int[] {0, 10, 10}, 3);
+        g.drawString("Y", width / 2 + 8, 15);
+        g.drawString("X", width - 8, height / 2 - 5);
+        g.drawLine(0,height / 2 , width , height / 2);
+        g.drawLine(0,height / 2 - 1 , width , height / 2 - 1);
+        g.drawLine(0,height / 2 + 1 , width , height / 2 + 1);
+        g.drawLine(width / 2,0,width / 2,height);
+        g.drawLine(width / 2 - 1,0,width / 2 - 1,height);
+        g.drawLine(width / 2 + 1,0,width / 2 + 1,height);
     }
 }
