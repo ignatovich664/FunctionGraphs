@@ -5,9 +5,10 @@ import java.awt.*;
 
 public class MainPanel extends JPanel {
     public MainPanel() {
-        GraphPanel panel = new GraphPanel();
+        GraphPanel panel = new GraphPanel(500);
+        setBackground(Color.white);
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
-        setBackground(Color.white);
+
     }
 }
