@@ -21,10 +21,11 @@ public class GraphPanel extends JPanel {
         this.width = size;
         this.height = size;
         sqareSize = size / 20;
-        setOpaque(false);
     }
 
     public void paint(Graphics g){
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, getWidth(), getHeight());
         drawGrid(g);
         drawAxis(g);
         drawLineFunction(g);

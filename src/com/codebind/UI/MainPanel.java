@@ -1,13 +1,17 @@
 package com.codebind.UI;
 
 import com.codebind.Classes.CubeFunction;
+import com.codebind.Classes.FileHelper;
 import com.codebind.Classes.LineFunction;
 import com.codebind.Classes.SquareFunction;
 import com.codebind.Main;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class MainPanel extends JPanel {
     JTextField lineFunctionK;
@@ -24,9 +28,7 @@ public class MainPanel extends JPanel {
     JCheckBox cubeFunctionDraw;
     GraphPanel graphPanel;
 
-
     public MainPanel() {
-        setBackground(Color.white);
         setLayout(new BorderLayout());
         addBottomPanel();
         drawGraphs();
@@ -37,13 +39,28 @@ public class MainPanel extends JPanel {
         bottomPanel.add(createLineFunctionPanel());
         bottomPanel.add(createSquareFunctionPanel());
         bottomPanel.add(createCubeFunctionPanel());
+        JPanel buttonsPanel = new JPanel(new GridLayout(2,1));
         JButton b = new JButton("Построить графики");
         b.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 drawGraphs();
             }
         });
-        bottomPanel.add(b);
+        buttonsPanel.add(b);
+
+        JButton b1 = new JButton("Сохранить графики");
+        b1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                try {
+                    FileHelper.saveImage(graphPanel);
+                }
+                catch (Error error) {
+                    showWarning("При сохранении файла произошла ошибка: " + error.getMessage());
+                }
+            }
+        });
+        buttonsPanel.add(b1);
+        bottomPanel.add(buttonsPanel);
         add(bottomPanel, BorderLayout.SOUTH);
     }
     private JPanel createLineFunctionPanel() {
@@ -88,7 +105,6 @@ public class MainPanel extends JPanel {
 
         return functionPanel;
     }
-
     private JPanel createCubeFunctionPanel() {
         JPanel functionPanel = new JPanel(new GridLayout(5,2));
 
@@ -116,7 +132,6 @@ public class MainPanel extends JPanel {
 
         return functionPanel;
     }
-
     private void drawGraphs() {
         if(graphPanel != null)
             this.remove(graphPanel);
@@ -184,6 +199,7 @@ public class MainPanel extends JPanel {
             cubeFunction = new CubeFunction(a,b, c, d);
         }
         graphPanel = new GraphPanel(500, lineFunction, squareFunction, cubeFunction);
+        graphPanel.setBackground(Color.green);
         add(graphPanel, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
@@ -191,4 +207,5 @@ public class MainPanel extends JPanel {
     private void showWarning(String message) {
         JOptionPane.showMessageDialog(null,message);
     }
+
 }
