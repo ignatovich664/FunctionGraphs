@@ -15,9 +15,8 @@ public class Main {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
         JFrame frame = new JFrame();
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(1000, 800));
+        frame.setSize(new Dimension(1100, 800));
         mainPanel = new MainPanel();
         frame.add(mainPanel);
         frame.setVisible(true);
