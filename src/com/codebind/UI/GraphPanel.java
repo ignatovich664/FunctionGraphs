@@ -1,5 +1,9 @@
 package com.codebind.UI;
 
+import com.codebind.Classes.CubeFunction;
+import com.codebind.Classes.LineFunction;
+import com.codebind.Classes.SquareFunction;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +11,13 @@ public class GraphPanel extends JPanel {
     int width;
     int height;
     int sqareSize;
-    public GraphPanel(int size){
+    LineFunction lineFunction;
+    SquareFunction squareFunction;
+    CubeFunction cubeFunction;
+    public GraphPanel(int size , LineFunction lineFunction, SquareFunction squareFunction, CubeFunction cubeFunction){
+        this.lineFunction = lineFunction;
+        this.squareFunction = squareFunction;
+        this.cubeFunction = cubeFunction;
         this.width = size;
         this.height = size;
         sqareSize = size / 20;
@@ -17,19 +27,22 @@ public class GraphPanel extends JPanel {
     public void paint(Graphics g){
         drawGrid(g);
         drawAxis(g);
-        drawLineFunction(g, 1,0);
-        drawSquareFunction(g, 1, 0, 0);
-        drawCubeFunction(g, 1,0,0,0);
+        drawLineFunction(g);
+        drawSquareFunction(g);
+        drawCubeFunction(g);
     }
 
-    private void drawLineFunction(Graphics g, double k, double b) {
-        drawFunction(g,0,0,k,b, Color.red);
+    private void drawLineFunction(Graphics g) {
+        if(lineFunction != null)
+            drawFunction(g,0,0,lineFunction.k,lineFunction.b, Color.red);
     }
-    private void drawSquareFunction(Graphics g, double a, double b, double c){
-        drawFunction(g,0,a,b,c, Color.blue);
+    private void drawSquareFunction(Graphics g){
+        if(squareFunction != null)
+            drawFunction(g,0,squareFunction.a, squareFunction.b, squareFunction.c, Color.blue);
     }
-    private void drawCubeFunction(Graphics g, double a, double b, double c, double d){
-        drawFunction(g,a,b,c, d, Color.green);
+    private void drawCubeFunction(Graphics g){
+        if(cubeFunction != null)
+            drawFunction(g,cubeFunction.a,cubeFunction.b,cubeFunction.c, cubeFunction.d, Color.green);
     }
     private void drawFunction(Graphics g, double a, double b, double c, double d, Color color) {
         g.setColor(color);
