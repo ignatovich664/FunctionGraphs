@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Построитель графиков функций");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(new Dimension(1100, 800));
