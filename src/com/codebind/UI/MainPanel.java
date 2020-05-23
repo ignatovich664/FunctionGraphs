@@ -140,12 +140,12 @@ public class MainPanel extends JPanel {
         if(needDrawLineFinction) {
             double k = 0,b = 0;
             try {
-                k = Integer.parseInt(lineFunctionK.getText());
+                k = Double.parseDouble(lineFunctionK.getText().replace(',','.'));
             } catch (Exception ex) {
                 showWarning("Коэффициент k для функции y = kx + b не является числом");
             }
             try {
-                b = Integer.parseInt(lineFunctionB.getText());
+                b = Double.parseDouble(lineFunctionB.getText().replace(',','.'));
             } catch (Exception ex) {
                 showWarning("Коэффициент b для функции y = kx + b не является числом");
             }
@@ -156,17 +156,17 @@ public class MainPanel extends JPanel {
         if(needDrawSquareFunction) {
             double a = 0, b = 0, c = 0;
             try {
-                a = Integer.parseInt(squareFunctionA.getText());
+                a = Double.parseDouble(squareFunctionA.getText().replace(',','.'));
             } catch (Exception ex) {
                 showWarning("Коэффициент a для функции y = ax^2 + bx + c не является числом");
             }
             try {
-                b = Integer.parseInt(squareFunctionB.getText());
+                b = Double.parseDouble(squareFunctionB.getText().replace(',','.'));
             } catch (Exception ex) {
                 showWarning("Коэффициент b для функции y = ax^2 + bx + c не является числом");
             }
             try {
-                c = Integer.parseInt(squareFunctionC.getText());
+                c = Double.parseDouble(squareFunctionC.getText().replace(',','.'));
             } catch (Exception ex) {
                 showWarning("Коэффициент c для функции y = ax^2 + bx + c не является числом");
             }
@@ -177,22 +177,22 @@ public class MainPanel extends JPanel {
         if(needDrawCubeFunction) {
             double a = 0, b = 0, c = 0, d = 0;
             try {
-                a = Integer.parseInt(cubeFunctionA.getText());
+                a = Double.parseDouble(cubeFunctionA.getText().replace(',','.'));
             } catch (Exception ex) {
                 showWarning("Коэффициент a для функции y = ax^3 + bx^2 + cx + d не является числом");
             }
             try {
-                b = Integer.parseInt(cubeFunctionB.getText());
+                b = Double.parseDouble(cubeFunctionB.getText().replace(',','.'));
             } catch (Exception ex) {
                 showWarning("Коэффициент b для функции y = ax^3 + bx^2 + cx + d не является числом");
             }
             try {
-                c = Integer.parseInt(cubeFunctionC.getText());
+                c = Double.parseDouble(cubeFunctionC.getText().replace(',','.'));
             } catch (Exception ex) {
                 showWarning("Коэффициент c для функции y = ax^3 + bx^2 + cx + d не является числом");
             }
             try {
-                d = Integer.parseInt(cubeFunctionD.getText());
+                d = Double.parseDouble(cubeFunctionD.getText().replace(',','.'));
             } catch (Exception ex) {
                 showWarning("Коэффициент d для функции y = ax^3 + bx^2 + cx + d не является числом");
             }
