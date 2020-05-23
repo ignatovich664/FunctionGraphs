@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.IOException;
 
 public class FileHelper {
@@ -20,10 +22,27 @@ public class FileHelper {
     public static void saveImage(JPanel panel) {
         try {
             BufferedImage bi = createImage(panel);
-            File outputfile = new File("Graphs.png");
-            ImageIO.write(bi, "png", outputfile);
+
+
+
+
+
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
+            fileChooser.setSelectedFile(new File("Graphs.png"));
+            fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
+            fileChooser.setDialogTitle("Выберите куда сохранить файл");
+
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File outputfile = new File(fileChooser.getSelectedFile().toString());
+                ImageIO.write(bi, "png", outputfile);
+            }
+
         } catch (IOException e) {
             throw new Error(e.getMessage());
         }
     }
+
 }
