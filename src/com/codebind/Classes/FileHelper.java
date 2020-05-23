@@ -22,11 +22,6 @@ public class FileHelper {
     public static void saveImage(JPanel panel) {
         try {
             BufferedImage bi = createImage(panel);
-
-
-
-
-
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
             fileChooser.setSelectedFile(new File("Graphs.png"));

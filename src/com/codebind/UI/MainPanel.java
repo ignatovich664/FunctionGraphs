@@ -27,14 +27,14 @@ public class MainPanel extends JPanel {
     JCheckBox squareFunctionDraw;
     JCheckBox cubeFunctionDraw;
     GraphPanel graphPanel;
+    JPanel bottomPanel;
 
     public MainPanel() {
         setLayout(new BorderLayout());
         addBottomPanel();
-        drawGraphs();
     }
     private void addBottomPanel() {
-        JPanel bottomPanel = new JPanel(new GridLayout(1,5));
+        bottomPanel = new JPanel(new GridLayout(1,5));
 
         bottomPanel.add(createLineFunctionPanel());
         bottomPanel.add(createSquareFunctionPanel());
@@ -43,7 +43,7 @@ public class MainPanel extends JPanel {
         JButton b = new JButton("Построить графики");
         b.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                drawGraphs();
+                drawGraphs(getWidth());
             }
         });
         buttonsPanel.add(b);
@@ -132,7 +132,7 @@ public class MainPanel extends JPanel {
 
         return functionPanel;
     }
-    private void drawGraphs() {
+    public void drawGraphs(int mainPanelWidth) {
         if(graphPanel != null)
             this.remove(graphPanel);
         LineFunction lineFunction  =null;
@@ -198,8 +198,7 @@ public class MainPanel extends JPanel {
             }
             cubeFunction = new CubeFunction(a,b, c, d);
         }
-        graphPanel = new GraphPanel(500, lineFunction, squareFunction, cubeFunction);
-        graphPanel.setBackground(Color.green);
+        graphPanel = new GraphPanel(getHeight() - bottomPanel.getHeight(), lineFunction, squareFunction, cubeFunction, mainPanelWidth);
         add(graphPanel, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
