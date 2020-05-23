@@ -76,7 +76,7 @@ public class MainPanel extends JPanel {
         functionPanel.add(new JLabel("k:"));
         functionPanel.add(lineFunctionK);
 
-        lineFunctionB = new JTextField("0");
+        lineFunctionB = new JTextField("2");
         functionPanel.add(new JLabel("b:"));
         functionPanel.add(lineFunctionB);
 
@@ -95,11 +95,11 @@ public class MainPanel extends JPanel {
         functionPanel.add(new JLabel("a:"));
         functionPanel.add(squareFunctionA);
 
-        squareFunctionB = new JTextField("0");
+        squareFunctionB = new JTextField("2");
         functionPanel.add(new JLabel("b:"));
         functionPanel.add(squareFunctionB);
 
-        squareFunctionC = new JTextField("0");
+        squareFunctionC = new JTextField("3");
         functionPanel.add(new JLabel("c:"));
         functionPanel.add(squareFunctionC);
 
@@ -118,15 +118,15 @@ public class MainPanel extends JPanel {
         functionPanel.add(new JLabel("a:"));
         functionPanel.add(cubeFunctionA);
 
-        cubeFunctionB = new JTextField("0");
+        cubeFunctionB = new JTextField("2");
         functionPanel.add(new JLabel("b:"));
         functionPanel.add(cubeFunctionB);
 
-        cubeFunctionC = new JTextField("0");
+        cubeFunctionC = new JTextField("3");
         functionPanel.add(new JLabel("c:"));
         functionPanel.add(cubeFunctionC);
 
-        cubeFunctionD = new JTextField("0");
+        cubeFunctionD = new JTextField("4");
         functionPanel.add(new JLabel("d:"));
         functionPanel.add(cubeFunctionD);
 
