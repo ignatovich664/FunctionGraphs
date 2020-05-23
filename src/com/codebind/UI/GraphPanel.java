@@ -54,7 +54,7 @@ public class GraphPanel extends JPanel {
         for (int i = 0; i < width; i++) {
             int x =  i - width / 2;
             int y = (int)( height / 2 - ((a / sqareSize / sqareSize * x * x * x) + (b / sqareSize * x * x) + (c * x)  + (d * sqareSize)));
-            if(y != 0 && i < width && y < height)
+            if(y != 0 && i  > 0   && i < width + xOffset && y < height)
                 g.drawLine(prevX,prevY,i + xOffset,y);
             prevX = i + xOffset;
             prevY = y;
