@@ -1,21 +1,26 @@
 package com.codebind.UI;
 
+import com.codebind.Classes.AxisSetting;
 import com.codebind.Classes.CubeFunction;
 import com.codebind.Classes.LineFunction;
 import com.codebind.Classes.SquareFunction;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
 
 public class GraphPanel extends JPanel {
     int width;
     int height;
     int sqareSize;
     int xOffset;
+    double xStep;
+    double yStep;
     LineFunction lineFunction;
     SquareFunction squareFunction;
     CubeFunction cubeFunction;
-    public GraphPanel(int size , LineFunction lineFunction, SquareFunction squareFunction, CubeFunction cubeFunction, int mainPanelWidth){
+    AxisSetting axisSetting;
+    public GraphPanel(int size , LineFunction lineFunction, SquareFunction squareFunction, CubeFunction cubeFunction, int mainPanelWidth, AxisSetting axisSetting){
         this.lineFunction = lineFunction;
         this.squareFunction = squareFunction;
         this.cubeFunction = cubeFunction;
@@ -23,6 +28,9 @@ public class GraphPanel extends JPanel {
         this.height = ((size - 15) / 20) * 20;
         sqareSize = this.height / 20;
         this.xOffset = (mainPanelWidth / 2) - this.width / 2;
+        this.axisSetting = axisSetting;
+        xStep = (double) (axisSetting.xMax - axisSetting.xMin) / (double) 20;
+        yStep = (double) (axisSetting.yMax - axisSetting.yMin) / (double) 20;
     }
 
     public void paint(Graphics g){
@@ -50,14 +58,15 @@ public class GraphPanel extends JPanel {
     }
     private void drawFunction(Graphics g, double a, double b, double c, double d, Color color) {
         g.setColor(color);
-        int prevX = 0, prevY = 0;
-        for (int i = 0; i < width; i++) {
-            int x =  i - width / 2;
-            int y = (int)( height / 2 - ((a / sqareSize / sqareSize * x * x * x) + (b / sqareSize * x * x) + (c * x)  + (d * sqareSize)));
-            if(y != 0 && i  > 0   && i < width + xOffset && y < height)
-                g.drawLine(prevX,prevY,i + xOffset,y);
-            prevX = i + xOffset;
-            prevY = y;
+        int screenX2 = 0, screenY2 = 0;
+        for (int screenX1 = 0 + xOffset; screenX1 < width + xOffset; screenX1+=1) {
+            double x1 = (double) (screenX1 - xOffset - width / 2) / (double) sqareSize * xStep;
+            double y1 = (a * x1 * x1 * x1) + (b * x1 * x1) + (c * x1) + d;
+            int screenY1 = (int) ((height /2) - (y1 * sqareSize / yStep));
+            if (screenX1 != 0 && screenX1 > 0 + xOffset && screenX1 < width + xOffset && screenY1 < height)
+                g.drawLine(screenX2, screenY2, screenX1, screenY1);
+            screenX2 = screenX1;
+            screenY2 = screenY1;
         }
     }
     private void drawGrid(Graphics g) {
@@ -91,19 +100,17 @@ public class GraphPanel extends JPanel {
     }
     private void drawCoordinatesGrid(Graphics g) {
         g.setColor(Color.BLACK);
-        int ynumberCoeff = 0;
-        for (int i = 0; i < 21; i++) {
-            int centerCoeff = i >= 10 ? 3 : 8;
-            g.drawString(String.valueOf(i - 10), i * sqareSize + xOffset - centerCoeff, height + 15);
-            if(i == 0)
-                g.drawString(String.valueOf(i + 10 - ynumberCoeff), 0 + xOffset - 20, i * sqareSize + 10);
-            else if(i == 20)
-                g.drawString(String.valueOf(i + 10 - ynumberCoeff), 0 + xOffset - 20, i * sqareSize + 5);
-            else
-                g.drawString(String.valueOf(i + 10 - ynumberCoeff), 0 + xOffset - 15, i * sqareSize + 5);
-            ynumberCoeff += 2;
+        int maxLength = String.valueOf(axisSetting.xMin).length() + 1;
+        double xCounter = axisSetting.xMin, yCounter = axisSetting.yMin;
+        for (int i = 0; i <= 20; i++) {
+            String text = new DecimalFormat("#.##").format((double) xCounter);
+            g.drawString(text, (i * sqareSize) + xOffset - 2 * text.length(), height + 15);
+            xCounter+=xStep;
         }
-
-        //g.drawString("0", width - 8 + xOffset, height / 2 - 5);
+        for (int i = 0; i <= 20; i++) {
+            String text = new DecimalFormat("#.##").format((double) yCounter * (yCounter == 0 ? 1.0 : -1.0));
+            g.drawString(text, 0 + xOffset - 10 * maxLength, i * sqareSize + 10);
+            yCounter+=yStep;
+        }
     }
 }
