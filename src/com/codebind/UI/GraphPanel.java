@@ -9,17 +9,41 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.DecimalFormat;
 
+/**
+ * Класс панели на котороый выводятся графики
+ * @autor Игнатович
+ * @version 1.0
+ */
 public class GraphPanel extends JPanel {
+    /** Поле ширины области графика */
     int width;
+    /** Поле высоты области графика */
     int height;
+    /** Поле размер в пикселях 1 квартата координатной сетки */
     int sqareSize;
+    /** Поле смещение графика он левой границы окна в пикселях */
     int xOffset;
+    /** Поле масштаба по оси X */
     double xStep;
+    /** Поле масштаба по оси Y */
     double yStep;
+    /** Поле линейной функции */
     LineFunction lineFunction;
+    /** Поле квадратной функции */
     SquareFunction squareFunction;
+    /** Поле кубической функции */
     CubeFunction cubeFunction;
+    /** Поле настроек координатный осей */
     AxisSetting axisSetting;
+    /**
+     * Конструктор - создание нового объекта с определенными значениями
+     * @param size - длина и ширина координатной сетки
+     * @param lineFunction - линейная функция
+     * @param squareFunction - квадратная функция
+     * @param cubeFunction - кубическая функция
+     * @param mainPanelWidth - ширина панели в которой находится GraphPanel
+     * @param axisSetting - найстройки координатный осей
+     */
     public GraphPanel(int size , LineFunction lineFunction, SquareFunction squareFunction, CubeFunction cubeFunction, int mainPanelWidth, AxisSetting axisSetting){
         this.lineFunction = lineFunction;
         this.squareFunction = squareFunction;
@@ -32,7 +56,10 @@ public class GraphPanel extends JPanel {
         xStep = (double) (axisSetting.xMax - axisSetting.xMin) / (double) 20;
         yStep = (double) (axisSetting.yMax - axisSetting.yMin) / (double) 20;
     }
-
+    /**
+     * Функция рисующая содедржимое GraphPanel
+     * @param g графический контекст с помощью которого рисуется содедржимое GraphPanel
+     */
     public void paint(Graphics g){
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
@@ -43,19 +70,39 @@ public class GraphPanel extends JPanel {
         drawSquareFunction(g);
         drawCubeFunction(g);
     }
-
+    /**
+     * Функция рисующая линейную функцию
+     * @param g графический контекст с помощью которого рисуется содедржимое GraphPanel
+     */
     private void drawLineFunction(Graphics g) {
         if(lineFunction != null)
             drawFunction(g,0,0,lineFunction.k,lineFunction.b, Color.red);
     }
+    /**
+     * Функция рисующая квадратную функцию
+     * @param g графический контекст с помощью которого рисуется содедржимое GraphPanel
+     */
     private void drawSquareFunction(Graphics g){
         if(squareFunction != null)
             drawFunction(g,0,squareFunction.a, squareFunction.b, squareFunction.c, Color.blue);
     }
+    /**
+     * Функция рисующая кубическую функцию
+     * @param g графический контекст с помощью которого рисуется содедржимое GraphPanel
+     */
     private void drawCubeFunction(Graphics g){
         if(cubeFunction != null)
             drawFunction(g,cubeFunction.a,cubeFunction.b,cubeFunction.c, cubeFunction.d, Color.green);
     }
+    /**
+     * Функция рисующая функцию
+     * @param g графический контекст с помощью которого рисуется содедржимое GraphPanel
+     * @param a параметр a
+     * @param b параметр b
+     * @param c параметр c
+     * @param d параметр d
+     * @param color цвет которым будет нарисована функция
+     */
     private void drawFunction(Graphics g, double a, double b, double c, double d, Color color) {
         g.setColor(color);
         int screenX2 = 0, screenY2 = 0;
@@ -69,6 +116,10 @@ public class GraphPanel extends JPanel {
             screenY2 = screenY1;
         }
     }
+    /**
+     * Функция рисующая коордитантую сетку
+     * @param g графический контекст с помощью которого рисуется содедржимое GraphPanel
+     */
     private void drawGrid(Graphics g) {
         g.setColor(new Color(153,153,153));
         for(int y = 0;; ) {
@@ -85,6 +136,10 @@ public class GraphPanel extends JPanel {
                 break;
         }
     }
+    /**
+     * Функция рисующая координатные оси
+     * @param g графический контекст с помощью которого рисуется содедржимое GraphPanel
+     */
     private void drawAxis(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillPolygon(new int[] {width + xOffset, width - 10 + xOffset, width - 10 + xOffset}, new int[] {height / 2, height / 2 - 5, height / 2 + 5}, 3);
@@ -98,6 +153,10 @@ public class GraphPanel extends JPanel {
         g.drawLine(width / 2 - 1 + xOffset,0,width / 2 - 1 + xOffset,height);
         g.drawLine(width / 2 + 1 + xOffset,0,width / 2 + 1 + xOffset,height);
     }
+    /**
+     * Функция рисующая подписи координатных осей
+     * @param g графический контекст с помощью которого рисуется содедржимое GraphPanel
+     */
     private void drawCoordinatesGrid(Graphics g) {
         g.setColor(Color.BLACK);
         int maxLength = String.valueOf(axisSetting.xMin).length() + 1;

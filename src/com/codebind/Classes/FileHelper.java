@@ -5,11 +5,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.IOException;
 
+/**
+ * Класс для работы с файлами
+ * @autor Игнатович
+ * @version 1.0
+ */
 public class FileHelper {
+    /**
+     * Функция возвращает изображение панели переданной входным параметром
+     * @param panel палеь изображение которой будет возвращено
+     * @return возвращает изображение панели переданной входным параметром
+     */
     private static BufferedImage createImage(JPanel panel) {
         int w = panel.getWidth();
         int h = panel.getHeight();
@@ -19,6 +28,10 @@ public class FileHelper {
         g.dispose();
         return bi;
     }
+    /**
+     * Функция сохраняет в файл изображение панели переданной входным параметром
+     * @param panel палеь изображение которой будет сохранено
+     */
     public static void saveImage(JPanel panel) {
         try {
             BufferedImage bi = createImage(panel);

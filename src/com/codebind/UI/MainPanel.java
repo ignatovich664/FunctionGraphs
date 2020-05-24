@@ -7,32 +7,58 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 
+/**
+ * Класс вывода главной панели содержащей все элементы интерфейса.
+ * @autor Игнатович
+ * @version 1.0
+ */
 public class MainPanel extends JPanel {
+    /** Поле ввода параметра k линейной функции */
     JTextField lineFunctionK;
+    /** Поле ввода параметра b линейной функции */
     JTextField lineFunctionB;
+    /** Поле ввода параметра a квадратной функции */
     JTextField squareFunctionA;
+    /** Поле ввода параметра b квадратной функции */
     JTextField squareFunctionB;
+    /** Поле ввода параметра c квадратной функции */
     JTextField squareFunctionC;
+    /** Поле ввода параметра a кубической функции */
     JTextField cubeFunctionA;
+    /** Поле ввода параметра b кубической функции */
     JTextField cubeFunctionB;
+    /** Поле ввода параметра c кубической функции */
     JTextField cubeFunctionC;
+    /** Поле ввода параметра d кубической функции */
     JTextField cubeFunctionD;
+    /** Поле чекбокса показывающего нужно ли рисовать линейную функцию */
     JCheckBox lineFunctionDraw;
+    /** Поле чекбокса показывающего нужно ли рисовать квадратную функцию */
     JCheckBox squareFunctionDraw;
+    /** Поле чекбокса показывающего нужно ли рисовать кубическую функцию */
     JCheckBox cubeFunctionDraw;
+    /** Поле панели на котороый выводятся графики */
     GraphPanel graphPanel;
+    /** Поле нижней панели с интерфейсом программы */
     JPanel bottomPanel;
+    /** Поле ввода минимального значение коордитантой оси X */
     JTextField xMinTextField;
+    /** Поле ввода максимального значение коордитантой оси X */
     JTextField xMaxTextField;
+    /** Поле ввода минимального значение коордитантой оси Y */
     JTextField yMinTextField;
+    /** Поле ввода максимального значение коордитантой оси Y */
     JTextField yMaxTextField;
-    JTextField xStepTextField;
-    JTextField yStepTextField;
-
+    /**
+     * Конструктор - создание нового объекта с определенными значениями
+     */
     public MainPanel() {
         setLayout(new BorderLayout());
         addBottomPanel();
     }
+    /**
+     * Функция добавляющая нижнюю панель с интерфейсом программы
+     */
     private void addBottomPanel() {
         bottomPanel = new JPanel(new GridLayout(1,5));
 
@@ -64,6 +90,10 @@ public class MainPanel extends JPanel {
         bottomPanel.add(buttonsPanel);
         add(bottomPanel, BorderLayout.SOUTH);
     }
+    /**
+     * Функция возвращает панель с настройками линейной функции
+     * @return возвращает панель с настройками линейной функции
+     */
     private JPanel createLineFunctionPanel() {
         JPanel functionPanel = new JPanel(new GridLayout(5,1));
 
@@ -86,6 +116,10 @@ public class MainPanel extends JPanel {
 
         return functionPanel;
     }
+    /**
+     * Функция возвращает панель с настройками квадратной функции
+     * @return возвращает панель с настройками квадратной функции
+     */
     private JPanel createSquareFunctionPanel() {
         JPanel functionPanel = new JPanel(new GridLayout(5,1));
 
@@ -114,6 +148,10 @@ public class MainPanel extends JPanel {
 
         return functionPanel;
     }
+    /**
+     * Функция возвращает панель с настройками кубической функции
+     * @return возвращает панель с настройками кубической функции
+     */
     private JPanel createCubeFunctionPanel() {
         JPanel functionPanel = new JPanel(new GridLayout(5,1));
 
@@ -148,6 +186,10 @@ public class MainPanel extends JPanel {
 
         return functionPanel;
     }
+    /**
+     * Функция возвращает панель с настройками координатный осей X и Y
+     * @return возвращает панель с настройками координатный осей X и Y
+     */
     private JPanel createAxisSettingsPanel() {
         JPanel panel = new JPanel(new GridLayout(5, 1));
         JLabel textLabel = new JLabel("Оси");
@@ -223,6 +265,10 @@ public class MainPanel extends JPanel {
         });
         return panel;
     }
+    /**
+     * Функция вызывающаяся при событии изменеия текста в поле ввода максимального значение коордитантой оси X
+     * @return возвращает панель с настройками координатный осей X и Y
+     */
     void xMaxTextFieldTextChange() {
         try {
             int val = Integer.parseInt(xMaxTextField.getText());
@@ -234,6 +280,10 @@ public class MainPanel extends JPanel {
         catch (Exception e) {
         }
     }
+    /**
+     * Функция вызывающаяся при событии изменеия текста в поле ввода минимального значение коордитантой оси X
+     * @return возвращает панель с настройками координатный осей X и Y
+     */
     void xMinTextFieldTextChange() {
         try {
             int val = Integer.parseInt(xMinTextField.getText());
@@ -245,6 +295,10 @@ public class MainPanel extends JPanel {
         catch (Exception e) {
         }
     }
+    /**
+     * Функция вызывающаяся при событии изменеия текста в поле ввода максимального значение коордитантой оси Y
+     * @return возвращает панель с настройками координатный осей X и Y
+     */
     void yMaxTextFieldTextChange() {
         try {
             int val = Integer.parseInt(yMaxTextField.getText());
@@ -256,6 +310,10 @@ public class MainPanel extends JPanel {
         catch (Exception e) {
         }
     }
+    /**
+     * Функция вызывающаяся при событии изменеия текста в поле ввода минимального значение коордитантой оси Y
+     * @return возвращает панель с настройками координатный осей X и Y
+     */
     void yMinTextFieldTextChange() {
         try {
             int val = Integer.parseInt(yMinTextField.getText());
@@ -267,6 +325,11 @@ public class MainPanel extends JPanel {
         catch (Exception e) {
         }
     }
+
+    /**
+     * Функция создающая панель на котороый выводятся графики
+     * @param mainPanelWidth ширина окна программы
+     */
     public void drawGraphs(int mainPanelWidth) {
         LineFunction lineFunction = null;
         boolean needDrawLineFinction = lineFunctionDraw.isSelected(), parseFine = true;
@@ -380,6 +443,11 @@ public class MainPanel extends JPanel {
             this.repaint();
         }
     }
+
+    /**
+     * Вывод окна с оповещением пользователю
+     * @param message текст оповещения
+     */
     private void showWarning(String message) {
         JOptionPane.showMessageDialog(null,message);
     }
