@@ -65,71 +65,86 @@ public class MainPanel extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
     }
     private JPanel createLineFunctionPanel() {
-        JPanel functionPanel = new JPanel(new GridLayout(3,2));
+        JPanel functionPanel = new JPanel(new GridLayout(5,1));
 
-        JLabel textLabel = new JLabel("y = kx + b");
-        textLabel.setForeground(Color.RED);
-        functionPanel.add(textLabel);
-        lineFunctionDraw = new JCheckBox("", true);
+        lineFunctionDraw = new JCheckBox("y = kx + b", true);
+        lineFunctionDraw.setHorizontalAlignment(SwingConstants.CENTER);
+        lineFunctionDraw.setForeground(Color.RED);
         functionPanel.add(lineFunctionDraw);
 
-        lineFunctionK = new JTextField("1");
-        functionPanel.add(new JLabel("k:"));
-        functionPanel.add(lineFunctionK);
+        JPanel panel1 = new JPanel();
+        lineFunctionK = new JTextField("1", 10);
+        panel1.add(new JLabel("k:"));
+        panel1.add(lineFunctionK);
+        functionPanel.add(panel1);
 
-        lineFunctionB = new JTextField("2");
-        functionPanel.add(new JLabel("b:"));
-        functionPanel.add(lineFunctionB);
+        JPanel panel2 = new JPanel();
+        lineFunctionB = new JTextField("2", 10);
+        panel2.add(new JLabel("b:"));
+        panel2.add(lineFunctionB);
+        functionPanel.add(panel2);
 
         return functionPanel;
     }
     private JPanel createSquareFunctionPanel() {
-        JPanel functionPanel = new JPanel(new GridLayout(4,2));
+        JPanel functionPanel = new JPanel(new GridLayout(5,1));
 
-        JLabel textLabel = new JLabel("y = ax^2 + bx + c");
-        textLabel.setForeground(Color.blue);
-        functionPanel.add(textLabel);
-        squareFunctionDraw = new JCheckBox("", true);
+        squareFunctionDraw = new JCheckBox("y = ax^2 + bx + c", true);
+        squareFunctionDraw.setHorizontalAlignment(SwingConstants.CENTER);
+        squareFunctionDraw.setForeground(Color.BLUE);
         functionPanel.add(squareFunctionDraw);
 
-        squareFunctionA = new JTextField("1");
-        functionPanel.add(new JLabel("a:"));
-        functionPanel.add(squareFunctionA);
+        JPanel panel1 = new JPanel();
+        squareFunctionA = new JTextField("1", 10);
+        panel1.add(new JLabel("a:"));
+        panel1.add(squareFunctionA);
+        functionPanel.add(panel1);
 
-        squareFunctionB = new JTextField("2");
-        functionPanel.add(new JLabel("b:"));
-        functionPanel.add(squareFunctionB);
+        JPanel panel2 = new JPanel();
+        squareFunctionB = new JTextField("2", 10);
+        panel2.add(new JLabel("b:"));
+        panel2.add(squareFunctionB);
+        functionPanel.add(panel2);
 
-        squareFunctionC = new JTextField("3");
-        functionPanel.add(new JLabel("c:"));
-        functionPanel.add(squareFunctionC);
+        JPanel panel3 = new JPanel();
+        squareFunctionC = new JTextField("3", 10);
+        panel3.add(new JLabel("c:"));
+        panel3.add(squareFunctionC);
+        functionPanel.add(panel3);
 
         return functionPanel;
     }
     private JPanel createCubeFunctionPanel() {
-        JPanel functionPanel = new JPanel(new GridLayout(5,2));
+        JPanel functionPanel = new JPanel(new GridLayout(5,1));
 
-        JLabel textLabel = new JLabel("y = ax^3 + bx^2 + cx + d");
-        textLabel.setForeground(Color.green);
-        functionPanel.add(textLabel);
-        cubeFunctionDraw = new JCheckBox("", true);
+        cubeFunctionDraw = new JCheckBox("y = ax^3 + bx^2 + cx + d", true);
+        cubeFunctionDraw.setHorizontalAlignment(SwingConstants.CENTER);
+        cubeFunctionDraw.setForeground(Color.green);
         functionPanel.add(cubeFunctionDraw);
 
-        cubeFunctionA = new JTextField("1");
-        functionPanel.add(new JLabel("a:"));
-        functionPanel.add(cubeFunctionA);
+        JPanel panel1 = new JPanel();
+        cubeFunctionA = new JTextField("1", 10);
+        panel1.add(new JLabel("a:"));
+        panel1.add(cubeFunctionA);
+        functionPanel.add(panel1);
 
-        cubeFunctionB = new JTextField("2");
-        functionPanel.add(new JLabel("b:"));
-        functionPanel.add(cubeFunctionB);
+        JPanel panel2 = new JPanel();
+        cubeFunctionB = new JTextField("2", 10);
+        panel2.add(new JLabel("b:"));
+        panel2.add(cubeFunctionB);
+        functionPanel.add(panel2);
 
-        cubeFunctionC = new JTextField("3");
-        functionPanel.add(new JLabel("c:"));
-        functionPanel.add(cubeFunctionC);
+        JPanel panel3 = new JPanel();
+        cubeFunctionC = new JTextField("3", 10);
+        panel3.add(new JLabel("c:"));
+        panel3.add(cubeFunctionC);
+        functionPanel.add(panel3);
 
-        cubeFunctionD = new JTextField("4");
-        functionPanel.add(new JLabel("d:"));
-        functionPanel.add(cubeFunctionD);
+        JPanel panel4 = new JPanel();
+        cubeFunctionD = new JTextField("4", 10);
+        panel4.add(new JLabel("d:"));
+        panel4.add(cubeFunctionD);
+        functionPanel.add(panel4);
 
         return functionPanel;
     }
